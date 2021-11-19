@@ -1,0 +1,33 @@
+{
+	"name": "sat-explorer-dev-container",
+	"build": {
+		"context": ".",
+		"dockerfile": "Dockerfile",
+	},
+	"settings": {
+		"terminal.integrated.defaultProfile.linux": "bash",
+		"python.formatting.provider": "autopep8",
+		"python.linting.pylintEnabled": true,
+		"python.linting.enabled": true,
+		"python.analysis.extraPaths": [
+			"./app",
+		],
+		"editor.formatOnSave": true,
+		"python.formatting.autopep8Args": [
+			"--max-line-length=200",
+		],
+		// "python.linting.ignorePatterns": [],
+		"tws.highlightTrailingWhiteSpace": true,
+	},
+	"extensions": [
+		"ms-python.python",
+		"ms-toolsai.jupyter",
+		"jkiviluoto.tws",
+	],
+	"runArgs": [
+		"--network=host",
+	],
+	"forwardPorts": [],
+	"remoteUser": "vscode",
+	"postCreateCommand": "pip install -r app/requirements.txt"
+}

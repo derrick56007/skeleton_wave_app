@@ -1,0 +1,17 @@
+services:
+  waved:
+    container_name: waved
+    build:
+      context: waved/
+    ports:
+      - 10101:10101
+  app:
+    container_name: app
+    build:
+      context: app/
+    depends_on:
+      - waved
+    environment:
+      - H2O_WAVE_ADDRESS=http://waved:10101
+      - H2O_WAVE_APP_ADDRESS=http://app:8000
+    command: ["uvicorn", "--host=0.0.0.0", "--port=8000", "app:main"]
